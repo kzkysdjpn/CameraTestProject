@@ -9,7 +9,8 @@ public class MainActivity extends Activity {
     private GLSurfaceView mView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
@@ -17,7 +18,8 @@ public class MainActivity extends Activity {
         mView.setEGLContextClientVersion(2);
         mView.setRenderer(new Renderer(this));
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+	return;
     }
 
     @Override
