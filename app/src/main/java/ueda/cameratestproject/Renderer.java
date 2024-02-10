@@ -146,8 +146,13 @@ public class Renderer implements GLSurfaceView.Renderer {
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, 0);
     }
 
-    public void onSurfaceChanged (GL10 unused, int width, int height) {
+    private Size        mDisplaySize;
+    public void onSurfaceChanged (GL10 unused, int width, int height)
+    {
+		this.mDisplaySize = new Size(width, height);
         mConfigured = false;
+		GLES20.glViewport(0, 0, width, height);
+        return;
     }
 
     private int loadShader(int shaderType, String source) {
@@ -218,12 +223,10 @@ public class Renderer implements GLSurfaceView.Renderer {
         }
         mTexCoordBuffer.position(0);
 
-        Point displaySize = new Point();
-        mActivity.getWindowManager().getDefaultDisplay().getSize(displaySize);
         Size textureSize = mCamera.getCameraSize();
         Point textureOrigin = new Point(
-                (displaySize.x - textureSize.getWidth()) / 2,
-                (displaySize.y - textureSize.getHeight()) / 2);
+                (mDisplaySize.getWidth() - textureSize.getWidth()) / 2,
+                (mDisplaySize.getHeight() - textureSize.getHeight()) / 2);
 
         GLES20.glViewport(textureOrigin.x, textureOrigin.y, textureSize.getWidth(), textureSize.getHeight());
     }
